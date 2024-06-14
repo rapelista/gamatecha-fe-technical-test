@@ -1,6 +1,13 @@
 import { Inter as FontSans } from "next/font/google";
+import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+
+export const metadata: Metadata = {
+    title: "Gammatecha — Front-end Dev Test Case",
+    description:
+        "Gammatecha front-end dev test case by @gvstang (Farih Akmal Haqiqi)",
+};
 
 const fontSans = FontSans({
     subsets: ["latin"],
