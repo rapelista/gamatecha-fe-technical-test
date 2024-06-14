@@ -26,7 +26,7 @@ export default function DashboardLayout({
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col overflow-hidden">
                 <Navbar />
                 <main className="flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6">
                     {children}
