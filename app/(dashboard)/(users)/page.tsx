@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 const getData = async (): Promise<UserType[]> => {
     const host = process.env.API_URL;
 
-    const res = await fetch(host + "/api/users");
+    const res = await fetch(host + "/api/users", {
+        cache: "no-store",
+    });
     if (!res.ok) {
         throw new Error("Failed to fetch users");
     }
@@ -25,7 +27,7 @@ export default async function HomePage() {
             {!users || users.length === 0 ? (
                 <UsersEmpty />
             ) : (
-                <Users users={[...users, ...users, ...users, ...users]} />
+                <Users users={users} />
             )}
         </>
     );
