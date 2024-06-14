@@ -1,14 +1,5 @@
-import { columns } from "@/components/dashboard/users-columns";
+import { Users } from "@/components/dashboard/users";
 import { UsersEmpty } from "@/components/dashboard/users-empty";
-import { DataTable } from "@/components/data-table";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import UserType from "entities/User";
 import type { Metadata } from "next";
 
@@ -32,19 +23,7 @@ export default async function HomePage() {
             {!users || users.length === 0 ? (
                 <UsersEmpty />
             ) : (
-                <DataTable columns={columns} data={users}>
-                    <Breadcrumb>
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Users</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
-                </DataTable>
+                <Users users={[...users, ...users, ...users, ...users]} />
             )}
         </>
     );
