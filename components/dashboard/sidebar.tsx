@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { SidebarLink } from "@/components/dashboard/sidebar-link";
 import { Separator } from "@/components/ui/separator";
+import { ModeToggle } from "../theme-mode-toggle";
 
 type SidebarItemType = {
     Icon: React.ComponentType<LucideProps>;
@@ -31,19 +32,24 @@ const sidebarItems: SidebarItemType[] = [
 ];
 
 export const Sidebar = () => (
-    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-        {sidebarItems.map(({ href, label, Icon }, key) => (
-            <SidebarLink
-                key={`sidebar-${key}`}
-                href={href}
-                className="flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-muted-foreground hover:text-primary"
-                activeClassName="flex items-center gap-3 px-3 py-2 transition-all rounded-lg bg-muted text-primary hover:text-primary"
-            >
-                <Icon className="w-4 h-4" />
-                {label}
-            </SidebarLink>
-        ))}
-    </nav>
+    <>
+        <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            {sidebarItems.map(({ href, label, Icon }, key) => (
+                <SidebarLink
+                    key={`sidebar-${key}`}
+                    href={href}
+                    className="flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-muted-foreground hover:text-primary"
+                    activeClassName="flex items-center gap-3 px-3 py-2 transition-all rounded-lg bg-muted text-primary hover:text-primary"
+                >
+                    <Icon className="w-4 h-4" />
+                    {label}
+                </SidebarLink>
+            ))}
+        </nav>
+        <div className="flex flex-col items-end justify-end flex-1 p-4">
+            <ModeToggle />
+        </div>
+    </>
 );
 
 export const SidebarMobile = () => (
@@ -79,6 +85,9 @@ export const SidebarMobile = () => (
                     </SidebarLink>
                 ))}
             </nav>
+            <div className="flex items-end justify-end flex-1">
+                <ModeToggle />
+            </div>
         </SheetContent>
     </Sheet>
 );

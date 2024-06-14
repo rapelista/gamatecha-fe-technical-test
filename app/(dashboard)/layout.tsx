@@ -21,7 +21,7 @@ export default function DashboardLayout({
                             <span className="">GAMMATECHA</span>
                         </Link>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex flex-col flex-1">
                         <Sidebar />
                     </div>
                 </div>
