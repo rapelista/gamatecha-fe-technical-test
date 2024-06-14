@@ -2,17 +2,14 @@ import { Users } from "@/components/dashboard/users";
 import { UsersEmpty } from "@/components/dashboard/users-empty";
 import UserType from "entities/User";
 import type { Metadata } from "next";
+import dummyUsers from "@/lib/dummyUsers.json";
 
 export const metadata: Metadata = {
     title: "Users",
 };
 
 const getData = async (): Promise<UserType[]> => {
-    const res = await fetch(process.env.API_URL + "/api/users");
-    if (!res.ok) {
-        throw new Error("Failed to fetch users 🚨");
-    }
-    return res.json();
+    return dummyUsers;
 };
 
 export default async function HomePage() {
