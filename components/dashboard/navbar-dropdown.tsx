@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CircleUser } from "lucide-react";
 import Link from "next/link";
+import { SidebarLink as DropdownLink } from "./sidebar-link";
 
 export const NavbarDropdown = () => (
     <DropdownMenu>
@@ -18,7 +19,9 @@ export const NavbarDropdown = () => (
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-            <DropdownMenuItem>My Account</DropdownMenuItem>
+            <DropdownLink href="/my-account" activeClassName="font-bold">
+                <DropdownMenuItem>My Account</DropdownMenuItem>
+            </DropdownLink>
             <DropdownMenuSeparator />
             <Link href="/auth/logout">
                 <DropdownMenuItem>Logout</DropdownMenuItem>
