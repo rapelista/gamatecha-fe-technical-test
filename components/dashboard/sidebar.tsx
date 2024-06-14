@@ -80,9 +80,6 @@ export const SidebarMobile = () => (
                     </SidebarLink>
                 ))}
             </nav>
-            <div className="flex items-end justify-end flex-1">
-                <ModeToggle />
-            </div>
         </SheetContent>
     </Sheet>
 );
