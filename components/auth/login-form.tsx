@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { redirect } from "next/navigation";
 
 export const LoginForm = () => {
     async function handleSubmit(formData: FormData) {
@@ -19,6 +20,7 @@ export const LoginForm = () => {
         };
 
         console.log(rawData);
+        redirect("/");
     }
 
     return (
