@@ -1,29 +1,51 @@
-import { PageHeading } from "@/components/dashboard/page-heading";
-import { Button } from "@/components/ui/button";
+import { columns } from "@/components/dashboard/users-columns";
+import { UsersEmpty } from "@/components/dashboard/users-empty";
+import { DataTable } from "@/components/data-table";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import UserType from "entities/User";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Users",
 };
 
-export default function HomePage() {
+const getData = async (): Promise<UserType[]> => {
+    const res = await fetch("http://localhost:3000/api/users");
+    if (!res.ok) {
+        throw new Error("Failed to fetch users 🚨");
+    }
+    return res.json();
+};
+
+export default async function HomePage() {
+    const users = await getData();
+
     return (
         <>
-            <PageHeading>Users</PageHeading>
-            <div
-                className="flex items-center justify-center flex-1 border border-dashed rounded-lg shadow-sm"
-                x-chunk="dashboard-02-chunk-1"
-            >
-                <div className="flex flex-col items-center gap-1 text-center">
-                    <h3 className="text-2xl font-bold tracking-tight">
-                        {"There's no users"}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                        You can start adding users to your platform
-                    </p>
-                    <Button className="mt-4">Add Product</Button>
-                </div>
-            </div>
+            {!users || users.length === 0 ? (
+                <UsersEmpty />
+            ) : (
+                <DataTable columns={columns} data={users}>
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>Users</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                </DataTable>
+            )}
         </>
     );
 }
