@@ -9,11 +9,20 @@ export const metadata: Metadata = {
 };
 
 const getData = async (): Promise<UserType[]> => {
-    return dummyUsers;
+    const host = process.env.API_URL;
+    console.log(`host: ${host}`);
+
+    const res = await fetch(host + "/api/users");
+    if (!res.ok) {
+        throw new Error("Failed to fetch users");
+    }
+    return res.json();
 };
 
 export default async function HomePage() {
     const users = await getData();
+
+    console.log(`Users: ${users.length}`);
 
     return (
         <>
