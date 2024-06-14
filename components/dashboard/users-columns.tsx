@@ -57,7 +57,6 @@ export const columns: ColumnDef<UserType>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            console.log(row.original);
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
