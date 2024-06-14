@@ -1,6 +1,10 @@
 import { PageHeading } from "@/components/dashboard/page-heading";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "My Account",
+};
 
 export default function HomePage() {
     return (
@@ -13,9 +17,9 @@ export default function HomePage() {
                     </span>
                 </div>
                 <span className="italic">farih.282828@gmail.com</span>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                     <Badge>Admin</Badge>
-                    <span>{`@${"gvstang"}`}</span>
+                    <span className="-mt-2 text-sm font-semibold underline underline-offset-8 decoration-2">{`@${"gvstang"}`}</span>
                 </div>
             </div>
         </>

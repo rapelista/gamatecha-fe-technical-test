@@ -4,7 +4,10 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Gammatecha — Front-end Dev Test Case",
+    title: {
+        template: "%s | Gammatecha — Front-end Dev Test Case",
+        default: "Gammatecha — Front-end Dev Test Case",
+    },
     description:
         "Gammatecha front-end dev test case by @gvstang (Farih Akmal Haqiqi)",
 };
