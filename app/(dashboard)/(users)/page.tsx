@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const getData = async (): Promise<UserType[]> => {
-    const res = await fetch("http://localhost:3000/api/users");
+    const res = await fetch(`${process.env.API_URL}/api/users`);
     if (!res.ok) {
         throw new Error("Failed to fetch users 🚨");
     }
