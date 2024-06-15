@@ -1,5 +1,6 @@
 "use server";
 
+import { UserType } from "@/types/entities";
 import { signIn, signOut } from "auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "next/navigation";
@@ -39,13 +40,16 @@ export async function getAccessToken(credentials: {
     username: string | unknown;
     password: string | unknown;
 }) {
-    const res = await fetch(process.env.NEXT_API_URL + "/api/auth/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-    });
+    const res = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/api/auth/login",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(credentials),
+        }
+    );
 
     const data: {
         refresh: string;
@@ -58,7 +62,7 @@ export async function getAccessToken(credentials: {
 
 export async function getUser(accessToken: string) {
     const userResponse = await fetch(
-        process.env.NEXT_API_URL + "/api/auth/me",
+        process.env.NEXT_PUBLIC_API_URL + "/api/auth/me",
         {
             method: "GET",
             headers: {
@@ -75,3 +79,16 @@ export async function getUser(accessToken: string) {
     const user = await userResponse.json();
     return user;
 }
+
+export const getUsers = async (accessToken: string): Promise<UserType[]> => {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/users", {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (!res.ok) {
+        return [];
+    }
+    return res.json();
+};

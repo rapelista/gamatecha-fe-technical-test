@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/table";
 import React, { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
-import { Button } from "./ui/button";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

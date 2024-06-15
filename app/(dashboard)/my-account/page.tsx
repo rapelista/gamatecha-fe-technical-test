@@ -23,7 +23,7 @@ export default async function MyAccountPage() {
                 <span className="italic">{email}</span>
                 <div className="flex items-center gap-2">
                     <Badge>{role.toUpperCase()}</Badge>
-                    <span className="-mt-2 text-sm font-semibold underline underline-offset-8 decoration-2">{`@${"gvstang"}`}</span>
+                    <span className="-mt-2 text-sm font-semibold underline underline-offset-8 decoration-2">{`@${username}`}</span>
                 </div>
             </div>
         </>

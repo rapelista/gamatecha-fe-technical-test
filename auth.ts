@@ -2,9 +2,6 @@ import { getAccessToken, getUser } from "actions";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { AuthError } from "@auth/core/errors";
-class CustomAuthorizeError extends AuthError {
-    code = "ERROR";
-}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     trustHost: true,

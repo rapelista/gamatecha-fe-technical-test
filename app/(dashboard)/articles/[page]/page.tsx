@@ -1,14 +1,11 @@
 import { Articles } from "@/components/dashboard/articles";
 import { ArticlesEmpty } from "@/components/dashboard/articles-empty";
-import { PageHeading } from "@/components/dashboard/page-heading";
 import { auth } from "auth";
 import { redirect } from "next/navigation";
 
 const getArticlesByPage = async (accessToken: string, id: string) => {
-    // console.log(process.env.NEXT_API_URL + "/api/articles?page=" + id);
-    // return [];
     const res = await fetch(
-        process.env.NEXT_API_URL + "/api/articles?page=" + id,
+        process.env.NEXT_PUBLIC_API_URL + "/api/articles?page=" + id,
         {
             headers: {
                 "Content-Type": "application/json",
