@@ -1,6 +1,6 @@
 "use client";
 
-import UserType from "entities/User";
+import UserType from "types/user";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";

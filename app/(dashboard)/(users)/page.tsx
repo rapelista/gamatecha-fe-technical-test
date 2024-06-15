@@ -1,6 +1,6 @@
 import { Users } from "@/components/dashboard/users";
 import { UsersEmpty } from "@/components/dashboard/users-empty";
-import UserType from "entities/User";
+import UserType from "types/user";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -7,7 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import UserType from "entities/User";
+import UserType from "types/user";
 import { columns } from "./users-columns";
 
 interface UsersProps {
