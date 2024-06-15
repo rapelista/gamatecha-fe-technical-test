@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: "Articles",
 };
 
-export default function HomePage() {
+export default function ArticlesPage() {
     return (
         <>
             <PageHeading>Articles</PageHeading>

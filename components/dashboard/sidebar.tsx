@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { SidebarLink } from "@/components/dashboard/sidebar-link";
 import { Separator } from "@/components/ui/separator";
-import { ModeToggle } from "../theme-mode-toggle";
+import { auth } from "auth";
 
 type SidebarItemType = {
     Icon: React.ComponentType<LucideProps>;
@@ -31,21 +31,29 @@ const sidebarItems: SidebarItemType[] = [
     },
 ];
 
-export const Sidebar = () => (
-    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-        {sidebarItems.map(({ href, label, Icon }, key) => (
-            <SidebarLink
-                key={`sidebar-${key}`}
-                href={href}
-                className="flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-muted-foreground hover:text-primary"
-                activeClassName="flex items-center gap-3 px-3 py-2 transition-all rounded-lg bg-muted text-primary hover:text-primary"
-            >
-                <Icon className="w-4 h-4" />
-                {label}
-            </SidebarLink>
-        ))}
-    </nav>
-);
+export const Sidebar = async () => {
+    const session = await auth();
+    const role = session.user.role;
+
+    return (
+        <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            {sidebarItems.map(({ href, label, Icon }, key) => {
+                if (role === "owner" && label === "Users") return null;
+                return (
+                    <SidebarLink
+                        key={`sidebar-${key}`}
+                        href={href}
+                        className="flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-muted-foreground hover:text-primary"
+                        activeClassName="flex items-center gap-3 px-3 py-2 transition-all rounded-lg bg-muted text-primary hover:text-primary"
+                    >
+                        <Icon className="w-4 h-4" />
+                        {label}
+                    </SidebarLink>
+                );
+            })}
+        </nav>
+    );
+};
 
 export const SidebarMobile = () => (
     <Sheet>
