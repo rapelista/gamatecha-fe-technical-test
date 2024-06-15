@@ -2,12 +2,15 @@ import Link from "next/link";
 import { Package2 } from "lucide-react";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Navbar } from "@/components/dashboard/navbar";
+import { auth } from "auth";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const session = await auth();
+
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-muted/40 md:block">
