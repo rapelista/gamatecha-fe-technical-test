@@ -35,25 +35,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-    callbacks: {
-        jwt: async ({ token, user }) => {
-            if (user) {
-                return {
-                    ...token,
-                    jwt: user.jwt,
-                    role: user.role,
-                    username: user.username,
-                };
-            }
-            return token;
-        },
-        session: async ({ session, token }) => {
-            if (token) {
-                session.jwt = token.jwt as { access: string; refresh: string };
-                session.user.role = token.role as string;
-                session.user.username = token.username as string;
-            }
-            return session;
-        },
-    },
+    // callbacks: {
+    //     jwt: async ({ token, user }) => {
+    //         if (user) {
+    //             return {
+    //                 ...token,
+    //                 jwt: user.jwt,
+    //                 role: user.role,
+    //                 username: user.username,
+    //             };
+    //         }
+    //         return token;
+    //     },
+    //     session: async ({ session, token }) => {
+    //         if (token) {
+    //             session.jwt = token.jwt as { access: string; refresh: string };
+    //             session.user.role = token.role as string;
+    //             session.user.username = token.username as string;
+    //         }
+    //         return session;
+    //     },
+    // },
 });
