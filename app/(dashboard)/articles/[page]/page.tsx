@@ -34,7 +34,7 @@ export default async function ArticlePage({
 
     return (
         <>
-            {articles.length === 0 ? (
+            {articles && articles.length === 0 ? (
                 <ArticlesEmpty />
             ) : (
                 <Articles articles={articles} page={params.page} />
