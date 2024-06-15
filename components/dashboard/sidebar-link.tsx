@@ -18,9 +18,14 @@ export const SidebarLink = ({
     children,
 }: SidebarLinkProps) => {
     const pathName = usePathname();
+    const firstPath = pathName.split("/");
+    const hrefPath = href.split("/");
+
     return (
         <Link
-            className={cn(pathName == href ? activeClassName : className)}
+            className={cn(
+                firstPath[1] === hrefPath[1] ? activeClassName : className
+            )}
             href={href}
         >
             {children}

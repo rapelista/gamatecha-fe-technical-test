@@ -7,8 +7,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import UserType from "types/user";
 import { columns } from "./users-columns";
+import { UserType } from "types/entities";
+import { Button } from "../ui/button";
 
 interface UsersProps {
     users: UserType[];
@@ -16,7 +17,11 @@ interface UsersProps {
 
 export const Users = ({ users }: UsersProps) => {
     return (
-        <DataTable columns={columns} data={users}>
+        <DataTable
+            columns={columns}
+            data={users}
+            rightTop={<Button>Add User</Button>}
+        >
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>

@@ -1,8 +1,9 @@
 import { Users } from "@/components/dashboard/users";
 import { UsersEmpty } from "@/components/dashboard/users-empty";
-import UserType from "types/user";
+import { UserType } from "types/entities";
 import type { Metadata } from "next";
 import { auth } from "auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Users",
@@ -21,10 +22,16 @@ const getData = async (accessToken: string): Promise<UserType[]> => {
     return res.json();
 };
 
-export default async function HomePage() {
+export default async function UsersPage() {
     const session = await auth();
-    const token = session.jwt.access;
-    const users = await getData(token);
+    const {
+        jwt: { access },
+        user: { role },
+    } = session;
+
+    if (role === "owner") redirect("/articles");
+
+    const users = await getData(access);
 
     return (
         <>

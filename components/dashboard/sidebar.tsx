@@ -55,39 +55,48 @@ export const Sidebar = async () => {
     );
 };
 
-export const SidebarMobile = () => (
-    <Sheet>
-        <SheetTrigger asChild>
-            <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0 md:hidden"
-            >
-                <Menu className="w-5 h-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col">
-            <nav className="grid gap-2 text-lg font-medium">
-                <Link
-                    href="#"
-                    className="flex items-center gap-2 text-lg font-semibold"
+export const SidebarMobile = async () => {
+    const session = await auth();
+    const role = session.user.role;
+
+    return (
+        <Sheet>
+            <SheetTrigger asChild>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="shrink-0 md:hidden"
                 >
-                    <Package2 className="w-6 h-6" />
-                    <span className="sr-only">GAMMATECH</span>
-                </Link>
-                <Separator className="my-2" />
-                {sidebarItems.map(({ href, label, Icon }, key) => (
-                    <SidebarLink
-                        key={`sidebar-mobile-${key}`}
-                        href={href}
-                        className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        activeClassName="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                    <Menu className="w-5 h-5" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="flex flex-col">
+                <nav className="grid gap-2 text-lg font-medium">
+                    <Link
+                        href="#"
+                        className="flex items-center gap-2 text-lg font-semibold"
                     >
-                        {label}
-                    </SidebarLink>
-                ))}
-            </nav>
-        </SheetContent>
-    </Sheet>
-);
+                        <Package2 className="w-6 h-6" />
+                        <span className="sr-only">GAMMATECH</span>
+                    </Link>
+                    <Separator className="my-2" />
+                    {sidebarItems.map(({ href, label, Icon }, key) => {
+                        if (role === "owner" && label === "Users") return null;
+
+                        return (
+                            <SidebarLink
+                                key={`sidebar-mobile-${key}`}
+                                href={href}
+                                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                                activeClassName="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                            >
+                                {label}
+                            </SidebarLink>
+                        );
+                    })}
+                </nav>
+            </SheetContent>
+        </Sheet>
+    );
+};

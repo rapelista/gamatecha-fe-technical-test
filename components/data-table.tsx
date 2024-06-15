@@ -21,7 +21,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import React, { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { Button } from "./ui/button";
 
@@ -29,17 +29,27 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     children?: React.ReactNode;
+    initialPageSize?: number;
+    withDefaultPagination?: boolean;
+    customPagination?: React.ReactNode;
+    rightTop?: React.ReactNode;
+    filterBy?: string;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
     children,
+    initialPageSize = 5,
+    withDefaultPagination = true,
+    customPagination,
+    filterBy = "username",
+    rightTop,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 5,
+        pageSize: initialPageSize,
     });
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -66,20 +76,20 @@ export function DataTable<TData, TValue>({
                 <div>{children}</div>
                 <div className="flex w-full gap-4 md:w-1/3">
                     <Input
-                        placeholder="Filter by username..."
+                        placeholder={`Filter by ${filterBy}...`}
                         value={
                             (table
-                                .getColumn("username")
+                                .getColumn(filterBy)
                                 ?.getFilterValue() as string) ?? ""
                         }
                         onChange={(event) =>
                             table
-                                .getColumn("username")
+                                .getColumn(filterBy)
                                 ?.setFilterValue(event.target.value)
                         }
                         className="flex-1"
                     />
-                    <Button>Add User</Button>
+                    {rightTop}
                 </div>
             </div>
             <div className="border rounded-md">
@@ -135,7 +145,8 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <DataTablePagination table={table} />
+            {withDefaultPagination && <DataTablePagination table={table} />}
+            {customPagination}
         </div>
     );
 }
