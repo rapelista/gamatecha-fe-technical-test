@@ -16,7 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             authorize: async (credentials) => {
                 const { username, password } = credentials;
-                const { access, detail } = await getAccessToken({
+                const { access, refresh, detail } = await getAccessToken({
                     username,
                     password,
                 });
@@ -24,8 +24,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     throw new AuthError("Invalid Credentials");
                 }
                 const user = await getUser(access);
-                return user;
+                return {
+                    ...user,
+                    name: `${user.first_name} ${user.last_name}`,
+                    jwt: {
+                        access,
+                        refresh,
+                    },
+                };
             },
         }),
     ],
+    callbacks: {
+        jwt: async ({ token, user }) => {
+            if (user) {
+                return {
+                    ...token,
+                    jwt: user.jwt,
+                    role: user.role,
+                    username: user.username,
+                };
+            }
+            return token;
+        },
+        session: async ({ session, token }) => {
+            if (token) {
+                session.jwt = token.jwt as { access: string; refresh: string };
+                session.user.role = token.role as string;
+                session.user.username = token.username as string;
+            }
+            return session;
+        },
+    },
 });
