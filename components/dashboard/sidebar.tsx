@@ -81,7 +81,7 @@ export const SidebarMobile = async () => {
                         <span className="sr-only">GAMMATECH</span>
                     </Link>
                     <Separator className="my-2" />
-                    {sidebarItems.map(({ href, label, Icon }, key) => {
+                    {sidebarItems.map(({ href, label }, key) => {
                         if (role === "owner" && label === "Users") return null;
 
                         return (
