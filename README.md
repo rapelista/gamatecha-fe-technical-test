@@ -17,7 +17,7 @@
     cp example.env .env
     ```
 
-4. You need to setup `AUTH_SECRET` and `NEXT_PUBLIC_API_URL`.
+4. You need to setup `AUTH_SECRET` and `NEXT_PUBLIC_API_URL`
 
     Run this code to generate `AUTH_SECRET` and copy the result to `.env`
 
@@ -44,9 +44,11 @@
 
 ## Demo
 
-You can see the demo at [http://gammatecha.gvstang.codes](http://gammatecha.gvstang.codes). But please to allow `Insecure Content` on browser site settings for web functionality.
+You can see the demo at [https://gammatecha.gvstang.codes](http://gammatecha.gvstang.codes). But please to allow `Insecure Content` on browser site settings for web functionality.
 
 Steps:
 Site-settings > Insecure Content > Allow
 
 Refer to [this](https://experienceleague.adobe.com/en/docs/target/using/experiences/vec/troubleshoot-composer/mixed-content#:~:text=Mixed%20content%20occurs%20if%20the,is%20mixed%20with%20insecure%20content.) - Mixed content occurs if the initial request is secure over HTTPS, but HTTPS and HTTP content is loaded to display the web page. HTTPS content is secure. HTTP content is insecure. Modern browsers might block the display of a page or display warning messages if secure content is mixed with insecure content.
+
+Thank you!
