@@ -4,8 +4,8 @@
 
 1. Clone this repository
     ```sh
-    git clone https://github.com/rapelista/gammatecha-fe-technical-test.git
-    cd gammatecha-fe-technical-test
+    git clone https://github.com/rapelista/gamatecha-fe-technical-test.git gamatecha-gvstang
+    cd gamatecha-gvstang
     ```
 2. Install dependencies
     ```sh
@@ -28,7 +28,7 @@
     This is example for `NEXT_PUBLIC_API_URL`
 
     ```sh
-    NEXT_PUBLIC_API_URL=http://123.12.1.0:8000
+    NEXT_PUBLIC_API_URL=http://192.168.12.1:8000
     ```
 
 5. Run in development or production
@@ -44,7 +44,7 @@
 
 ## Demo
 
-You can see the demo at [https://gammatecha.gvstang.codes](http://gammatecha.gvstang.codes). But please to allow `Insecure Content` on browser site settings for web functionality.
+You can see the demo at [https://gamatecha.gvstang.codes](http://gamatecha.gvstang.codes). But please to allow `Insecure Content` on browser site settings for web functionality.
 
 Steps:
 Site-settings > Insecure Content > Allow
