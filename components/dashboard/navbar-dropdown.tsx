@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { CircleUser } from "lucide-react";
-import Link from "next/link";
 import { SidebarLink as DropdownLink } from "./sidebar-link";
+import { LogoutForm } from "../auth/logout-form";
 
 export const NavbarDropdown = () => (
     <DropdownMenu>
@@ -23,9 +23,7 @@ export const NavbarDropdown = () => (
                 <DropdownMenuItem>My Account</DropdownMenuItem>
             </DropdownLink>
             <DropdownMenuSeparator />
-            <Link href="/auth/logout">
-                <DropdownMenuItem>Logout</DropdownMenuItem>
-            </Link>
+            <LogoutForm />
         </DropdownMenuContent>
     </DropdownMenu>
 );

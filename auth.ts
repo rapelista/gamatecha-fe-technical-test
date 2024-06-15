@@ -1,7 +1,13 @@
+import { getAccessToken, getUser } from "actions";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { AuthError } from "@auth/core/errors";
+class CustomAuthorizeError extends AuthError {
+    code = "ERROR";
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    trustHost: true,
     providers: [
         Credentials({
             credentials: {
@@ -9,21 +15,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 password: {},
             },
             authorize: async (credentials) => {
-                console.log(credentials);
-                let user = null;
-
-                user = {
-                    id: 1,
-                    name: "John Doe",
-                    email: "john@doe",
-                };
-
-                if (!user) {
-                    throw new Error("User not found.");
+                const { username, password } = credentials;
+                const { access, detail } = await getAccessToken({
+                    username,
+                    password,
+                });
+                if (detail) {
+                    throw new AuthError("Invalid Credentials");
                 }
-
-                console.log(user);
-
+                const user = await getUser(access);
                 return user;
             },
         }),

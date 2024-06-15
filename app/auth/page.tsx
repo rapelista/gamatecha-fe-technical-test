@@ -6,13 +6,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { auth } from "auth";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Login",
 };
 
-export default function AuthPage() {
+export default async function AuthPage() {
+    const session = await auth();
+    if (session) redirect("/");
+
     return (
         <div className="flex items-center justify-center h-screen gap-2">
             <Card className="w-full max-w-sm mx-2 md:mx-0">

@@ -3,6 +3,7 @@ import { Package2 } from "lucide-react";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Navbar } from "@/components/dashboard/navbar";
 import { auth } from "auth";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
     children,
@@ -10,6 +11,7 @@ export default async function DashboardLayout({
     children: React.ReactNode;
 }) {
     const session = await auth();
+    if (!session) redirect("/auth");
 
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

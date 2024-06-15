@@ -4,14 +4,24 @@ import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authenticate } from "actions";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import { toast } from "../ui/use-toast";
 
 export const LoginForm = () => {
     const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
+    useEffect(() => {
+        if (errorMessage) {
+            toast({
+                description: errorMessage,
+                variant: "destructive",
+            });
+        }
+    }, [errorMessage]);
+
     return (
         <form action={dispatch}>
-            <div>{errorMessage && <p>{errorMessage}</p>}</div>
             <CardContent className="grid gap-4">
                 <div className="grid gap-2">
                     <Label htmlFor="username">Username</Label>
@@ -42,6 +52,7 @@ export const LoginForm = () => {
 
 const LoginButton = () => {
     const { pending } = useFormStatus();
+
     const handleClick = (event) => {
         if (pending) {
             event.preventDefault();
@@ -54,6 +65,7 @@ const LoginButton = () => {
             className="w-full"
             type="submit"
             onClick={handleClick}
+            disabled={pending}
         >
             Sign in
         </Button>
