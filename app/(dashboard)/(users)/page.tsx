@@ -11,6 +11,9 @@ export const metadata: Metadata = {
 
 export default async function UsersPage() {
     const session = await auth();
+
+    if (!session) redirect("/auth");
+
     const {
         jwt: { access },
         user: { role },

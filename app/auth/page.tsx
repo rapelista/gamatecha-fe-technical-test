@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/auth/login-form";
+import { LoginWrapper } from "@/components/auth/login-form";
 import { ModeToggle } from "@/components/theme-mode-toggle";
 import {
     Card,
@@ -28,7 +28,7 @@ export default async function AuthPage() {
                         account.
                     </CardDescription>
                 </CardHeader>
-                <LoginForm />
+                <LoginWrapper />
             </Card>
 
             <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4">
