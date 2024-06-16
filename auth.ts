@@ -5,6 +5,9 @@ import { AuthError } from "@auth/core/errors";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     trustHost: true,
+    session: {
+        maxAge: 24 * 60 * 60,
+    },
     providers: [
         Credentials({
             credentials: {
